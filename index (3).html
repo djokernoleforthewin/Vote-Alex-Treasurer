@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Alex for Treasurer — Awty 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --green: #1a4a2e;
+      --green-mid: #2d6e47;
+      --green-light: #3d8f5f;
+      --gold: #c9a84c;
+      --gold-light: #e8c97a;
+      --gold-pale: #f5e9c8;
+      --cream: #faf7f0;
+      --dark: #0e1f14;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--dark);
+      font-family: 'DM Sans', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      background: var(--green);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      padding: 2rem;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 30% 60%, rgba(201,168,76,0.12) 0%, transparent 60%),
+                  radial-gradient(ellipse at 80% 20%, rgba(61,143,95,0.2) 0%, transparent 50%);
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(201,168,76,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,168,76,0.06) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    .hero-badge {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid rgba(201,168,76,0.4);
+      padding: 0.4rem 1.2rem;
+      border-radius: 2px;
+      margin-bottom: 2rem;
+      position: relative;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards 0.2s;
+    }
+
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(4.5rem, 14vw, 10rem);
+      font-weight: 900;
+      color: #fff;
+      line-height: 0.9;
+      position: relative;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.4s;
+    }
+
+    .hero-name span {
+      color: var(--gold);
+      display: block;
+    }
+
+    .hero-subtitle {
+      margin-top: 1.5rem;
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      font-weight: 300;
+      color: rgba(255,255,255,0.7);
+      letter-spacing: 0.05em;
+      position: relative;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.6s;
+    }
+
+    .hero-cta {
+      margin-top: 2.5rem;
+      position: relative;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.8s;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.85rem 2.5rem;
+      background: var(--gold);
+      color: var(--dark);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255,255,255,0.3);
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      animation: pulse 2s ease infinite;
+    }
+
+    /* ── SECTION SHARED ── */
+    section { padding: 6rem 2rem; }
+
+    .container { max-width: 900px; margin: 0 auto; }
+
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--green-light);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      color: var(--green);
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+    }
+
+    .divider {
+      width: 60px;
+      height: 3px;
+      background: var(--gold);
+      margin-bottom: 2rem;
+    }
+
+    /* ── WHY ALEX ── */
+    .why { background: var(--cream); }
+
+    .why p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #3a3a3a;
+      max-width: 680px;
+    }
+
+    /* ── CREDENTIALS ── */
+    .credentials { background: var(--green); }
+
+    .credentials .section-label { color: var(--gold-light); }
+    .credentials .section-title { color: #fff; }
+    .credentials .divider { background: var(--gold); }
+
+    .cred-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+
+    .cred-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 4px;
+      padding: 2rem 1.75rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .cred-card:hover { border-color: var(--gold); transform: translateY(-3px); }
+
+    .cred-icon {
+      font-size: 1.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .cred-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+
+    .cred-card p {
+      font-size: 0.9rem;
+      line-height: 1.65;
+      color: rgba(255,255,255,0.65);
+    }
+
+    /* ── GOALS ── */
+    .goals { background: var(--gold-pale); }
+
+    .goal-list { margin-top: 2rem; display: flex; flex-direction: column; gap: 1.25rem; }
+
+    .goal-item {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+      background: #fff;
+      border-left: 4px solid var(--gold);
+      padding: 1.5rem;
+      border-radius: 0 4px 4px 0;
+      transition: border-color 0.2s;
+    }
+    .goal-item:hover { border-color: var(--green); }
+
+    .goal-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--gold);
+      line-height: 1;
+      flex-shrink: 0;
+      width: 2.5rem;
+    }
+
+    .goal-item h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--green);
+      margin-bottom: 0.35rem;
+    }
+
+    .goal-item p {
+      font-size: 0.9rem;
+      line-height: 1.65;
+      color: #555;
+    }
+
+    /* ── VOTE ── */
+    .vote {
+      background: var(--dark);
+      text-align: center;
+    }
+
+    .vote .section-label { color: var(--gold-light); }
+
+    .vote-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 7vw, 5rem);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.05;
+      margin-bottom: 1.5rem;
+    }
+    .vote-headline span { color: var(--gold); }
+
+    .vote p {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.55);
+      max-width: 500px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--green);
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.35);
+      letter-spacing: 0.05em;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.3; }
+      50%       { opacity: 0.8; }
+    }
+
+    /* ── REVEAL ON SCROLL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-badge">Awty International School · Student Government 2026–27</div>
+    <h1 class="hero-name">Vote<span>Alex.</span></h1>
+    <p class="hero-subtitle">Treasurer · Experience You Can Count On</p>
+    <div class="hero-cta">
+      <a href="#why" class="btn">Why Alex?</a>
+    </div>
+    <div class="scroll-hint">↓ scroll</div>
+  </section>
+
+  <!-- WHY ALEX -->
+  <section class="why" id="why">
+    <div class="container">
+      <div class="reveal">
+        <p class="section-label">The Case</p>
+        <h2 class="section-title">Budgets don't lie.<br>They show what you value.</h2>
+        <div class="divider"></div>
+        <p>I've been involved in enough financial planning to know that. My name is Alex, and I'm running for Treasurer because I want to make sure our budget actually reflects what this student body cares about. I'm not learning on the job. I'm bringing real, proven experience into this role from day one.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CREDENTIALS -->
+  <section class="credentials" id="credentials">
+    <div class="container">
+      <div class="reveal">
+        <p class="section-label">Experience</p>
+        <h2 class="section-title">Built for this role.</h2>
+        <div class="divider"></div>
+      </div>
+      <div class="cred-grid">
+        <div class="cred-card reveal">
+          <h3>FBLA — States Qualifier</h3>
+          <p>Competed at the Texas FBLA State Leadership Conference in International Banking, one of the most analytically demanding events in the competition. It requires deep knowledge of global finance and monetary strategy at a level most students never reach.</p>
+        </div>
+        <div class="cred-card reveal">
+          <h3>Awty Finance & Investment Club</h3>
+          <p>Serving as an Executive Member on the Finance and Investment Committee, working directly with real budgets, analyzing resource allocation, and making decisions with genuine consequences for our school community.</p>
+        </div>
+        <div class="cred-card reveal">
+          <h3>Wharton Stock Pitch Competition</h3>
+          <p>Competed alongside a team of peers in the prestigious Wharton Stock Pitch Competition, researching, valuing, and presenting investment theses at an Ivy League standard. Real-world finance, real stakes.</p>
+        </div>
+        <div class="cred-card reveal">
+          <h3>Robotics Program Member</h3>
+          <p>An active member of Awty's Robotics program, so when I fight for better funding, I'm not advocating from the outside. I know exactly what's at stake and what's being left on the table.</p>
+        </div>
+        <div class="cred-card reveal">
+          <h3>Awty Art & Tech Club</h3>
+          <p>Serving as an Executive Member of the Awty Art and Tech Club, sitting at the intersection of creativity and innovation. This role reinforces why Fine Arts deserves the same investment as any other program at this school.</p>
+        </div>
+        <div class="cred-card reveal">
+          <h3>Speech & Debate + Spoken Word</h3>
+          <p>I've taken Speech and Debate as a class and seen firsthand what this program is capable of. Spoken word has been ignored for too long at Awty. I pride myself on encouraging fellow students to enter poetry competitions and Scholastic, because their voices deserve a real stage and real support.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GOALS -->
+  <section class="goals" id="goals">
+    <div class="container">
+      <div class="reveal">
+        <p class="section-label">Platform</p>
+        <h2 class="section-title">Four goals.<br>One year. Real results.</h2>
+        <div class="divider"></div>
+      </div>
+      <div class="goal-list">
+        <div class="goal-item reveal">
+          <div class="goal-num">01</div>
+          <div>
+            <h3>Fund Fine Arts & Robotics</h3>
+            <p>These students give up their free time, stay after school, and pour everything into their craft. I will go directly to board members and administration to close the funding gap, because decisions don't get made with the full picture, and part of my job is to change that.</p>
+          </div>
+        </div>
+        <div class="goal-item reveal">
+          <div class="goal-num">02</div>
+          <div>
+            <h3>A Real Coach for Speech & Debate</h3>
+            <p>Right now, that club is run entirely by students. They deserve a fully committed, specialized coach, someone who is there consistently and can take the program to where it deserves to be. I will advocate for that funding.</p>
+          </div>
+        </div>
+        <div class="goal-item reveal">
+          <div class="goal-num">03</div>
+          <div>
+            <h3>A Budget That Reflects You</h3>
+            <p>Funds drift toward things that don't connect with students. I will listen, ask, and make sure money goes toward programs, events, and initiatives that you actually value.</p>
+          </div>
+        </div>
+        <div class="goal-item reveal">
+          <div class="goal-num">04</div>
+          <div>
+            <h3>Full Transparency</h3>
+            <p>You will always know where the money is going. That is a promise, not a talking point.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VOTE -->
+  <section class="vote" id="vote">
+    <div class="container">
+      <div class="reveal">
+        <p class="section-label">2026–27 Student Government</p>
+        <h2 class="vote-headline">Vote <span>Alex</span><br>for Treasurer.</h2>
+        <p>Real experience. Real advocacy. A budget that finally reflects what this school actually stands for.</p>
+        <a href="#why" class="btn">Read the Platform ↑</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Alex for Treasurer · Awty International School · 2026–27</p>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
